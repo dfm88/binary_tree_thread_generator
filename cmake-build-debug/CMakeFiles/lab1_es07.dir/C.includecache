@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/diego/CLionProjects/lab1_es07/main.c
+stdio.h
+-
+unistd.h
+-
+pthread.h
+-
+stdlib.h
+-
+math.h
+-
+

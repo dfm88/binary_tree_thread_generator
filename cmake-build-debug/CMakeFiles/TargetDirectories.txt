@@ -1,0 +1,3 @@
+/mnt/c/Users/diego/CLionProjects/lab1_es07/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/diego/CLionProjects/lab1_es07/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/diego/CLionProjects/lab1_es07/cmake-build-debug/CMakeFiles/lab1_es07.dir
