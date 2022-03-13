@@ -16,8 +16,8 @@ void *generateThreads(void *par) {
     threadStruct *tSpoint, tSobj;
     tSpoint = (threadStruct *) par; //take the struct from arg
     tSobj = *tSpoint;
-    int newDepth = tSobj.myDepth +1;
-    pthread_t thread;
+    int newDepth = tSobj.myDepth + 1;
+    pthread_t thread2[2];
 
     if (tSobj.myDepth < maxDepth) {
         // create 2 new threads with increased depth
@@ -37,13 +37,15 @@ void *generateThreads(void *par) {
             newTsList[i].myAncestorsPidList[tSobj.myDepth] = pthread_self();
 
             pthread_create(
-                    &thread,
+                    &thread2[i],
                     NULL,
                     generateThreads,
                     (void *) &newTsList[i]
             );
-
-            pthread_join(thread, NULL);
+        }
+        for (int i = 0; i < 2; ++i) {
+            printf("\n");
+            pthread_join(thread2[i], NULL);
         }
 
     } else {
@@ -55,6 +57,7 @@ void *generateThreads(void *par) {
         putchar('\n');
         free(tSobj.myAncestorsPidList);
     }
+
     pthread_exit(NULL);
 
 }
@@ -76,11 +79,11 @@ int main(int argc, char **argv) {
     maxDepth = atoi(argv[1]);
     threadStruct tsList[2];
     int currentDepth = 0;
-    pthread_t thread;
+    pthread_t thread[2];
 
     // create firsts two threads
     for (int i = 0; i < 2; i++) {
-        int newDepth = currentDepth+1;
+        int newDepth = currentDepth + 1;
         tsList[i].myDepth = newDepth;
         // dynamic array of thread pids
         tsList[i].myAncestorsPidList = (ulong *) malloc(
@@ -89,7 +92,7 @@ int main(int argc, char **argv) {
         // assign to first element of array the root thread id
         tsList[i].myAncestorsPidList[currentDepth] = pthread_self();
         pthread_create(
-                &thread,
+                &thread[i],
                 NULL,
                 generateThreads,
                 (void *) &tsList[i]
